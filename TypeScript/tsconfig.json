@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+//    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "target": "es2017"
+    // <- 重点在这里 指定为最新版
+  },
+  "include": [
+    "*.*"
+    //指定需要编译的ts文件所在目录
+  ]
+}
