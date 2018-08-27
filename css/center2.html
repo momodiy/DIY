@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>absolute + margin负值实现垂直居中</title>
+    <style>
+        .box {
+            width: 500px;
+            height: 250px;
+            border: 1px solid #f00;
+            margin: auto;
+            position: relative;
+        }
+
+        .box4 .content {
+            width: 400px;
+            background: #ccc;
+            height: 70px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -200px;
+            margin-top: -35px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>4.absolute + margin 負值</h2>
+<div class="box box4">
+    <div class="content">
+        立马来看Amos实际完成的 <a href="http://csscoke.com/2015/07/31/nth-child_rwd_album/">
+        CSS3精美相册效果 </a>
+        效果吧！別忘了拖拉一下窗口看看 RWD 效果喔！
+    </div>
+</div>
+
+绝对定位在这个例子中会设置top:50%来抓取空间高度的50%，接着在将居中元素的margin-top设定为负一半的高度，这样就能让元素居中了.
+
+<BR><strong>包裹元素和居中对象都需要确定宽高</strong>
+</body>
+</html>

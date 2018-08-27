@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>absolute + translate</title>
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+        .box {
+            width: 500px;
+            height: 250px;
+            border: 1px solid #f00;
+            margin: auto;
+            position: relative;
+        }
+
+        .box6 .content {
+            width: 400px;
+            background: #ccc;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h2>6.absolute + margin: auto</h2>
+<div class="box box6">
+    <div class="content">
+        立马来看Amos实际完成的 <a href="http://csscoke.com/2015/07/31/nth-child_rwd_album/">
+        CSS3精美相册效果 </a>
+        效果吧！別忘了拖拉一下窗口看看 RWD 效果喔！
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h2{
+            text-align: center;
+        }
+        .box{
+            width: 500px;
+            height: 250px;
+            border: 1px solid #f00;
+            margin: auto;
+            position: relative;
+        }
+        .content{
+            width: 400px;
+            background: #ccc;
+            height: 70px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h2>5.absolute + translate(-50%, -50%)</h2>
+<div class="box box5">
+    <div class="content">
+        立马来看Amos实际完成的    <a href="http://csscoke.com/2015/07/31/nth-child_rwd_album/">
+        CSS3精美相册效果    </a>
+        效果吧！別忘了拖拉一下窗口看看 RWD 效果喔！  </div>
+</div>
+
+
+当元素设置为绝对定位后，假设它是抓不到整体可运用的空间范围，所以margin:auto会失效，但当你设置了top:0;bottom:0;时，绝对定位元素就抓到了可运用的空间了，这时你的margin:auto就生效了（神奇吧），如果你的绝对定位元素需要水平居中于父层，那你同样可以设定left:0;right:0;来让绝对定位元素取得空间可运用范围，再让marign-left与margin-right设定为auto即可居中。
+
+<strong>缺点：你的定位元素必须有固定的宽高（百分比也算）才能正常居中。</strong>
+</body>
+</html>

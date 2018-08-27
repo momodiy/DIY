@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单行文字垂直居中</title>
+    <style>
+        /*no.1*/
+        .content {
+            width: 400px;
+            background: #ccc;
+            line-height: 100px;
+            margin: auto;
+            text-align: center;
+        }
+
+        /*no.2*/
+        h2 {
+            text-align: center;
+        }
+
+        .box {
+            width: 500px;
+            border: 1px solid #f00;
+            margin: auto;
+            line-height: 200px;
+            text-align: center;
+        }
+
+        .box2 .content {
+            display: inline-block;
+            height: auto;
+            line-height: 1;
+            width: 400px;
+            background: #ccc;
+        }
+
+        .center {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /*no.3*/
+        .box {
+            width: 500px;
+            height: 250px;
+            border: 1px solid #f00;
+            margin: auto;
+            text-align: center;
+        }
+
+        .box::before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            width: 0;
+            vertical-align: middle;
+        }
+
+        .box .content {
+            width: 400px;
+            background: #ccc;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+<h2 class="center">Line-height</h2>
+<div class="content">Steven Lee.</div>
+
+此方式的原理是在于将单行文字的行高设定后，文字会位于行高的垂直中间位置，利用此原理就能轻松达成垂直居中的需求了。
+
+
+<h2 class="center">Line-height + inline-block</h2>
+<div class="box box2">
+    <div class="content">
+        立马来看Amos实际完成的 <a href="http://csscoke.com/2015/07/31/nth-child_rwd_album/">
+        CSS3精美相册效果 </a>
+        效果吧！別忘了拖拉一下窗口看看 RWD 效果喔！
+    </div>
+</div>
+
+将多个元素或多行元素当成一个行元素来看待，所以我们必须要将这些数据多包一层，并将其设定为inline-block，并在该inline-block对象的外层对象使用inline-block来代替height的设置，如此便可以达到垂直居中的目的了，从使你的数据是包含了标题跟内容在内也可以正常的垂直居中了。
+
+
+<h2 class="center">:before + inline-block</h2>
+<div class="box box3">
+    <div class="content">
+        立马来看Amos实际完成的 <a href="http://csscoke.com/2015/07/31/nth-child_rwd_album/">
+        CSS3精美相册效果 </a>
+        效果吧！別忘了拖拉一下窗口看看 RWD 效果喔！
+    </div>
+</div>
+:before 伪类元素搭配 inline-block 属性的写法应该是很传统的垂直居中的技巧了，此方式的好处在于子元素居中可以不需要特别设定高度，我们将利用:before伪类元素设定为100%高的inline-block，再搭配上将需要居中的子元素同样设置成inline-block性质后，就能使用vertical-align:middle来达到垂直居中的目的了，此方式在以往其实是个非常棒的垂直居中解决方案，唯独需要特别处理掉inline-block元素之间的4-5px空间这个小缺陷，但也很实用了。
+
+
+</body>
+</html>
