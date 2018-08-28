@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多行文字的垂直居中</title>
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+        .box {
+            width: 500px;
+            height: 250px;
+            border: 1px solid #f00;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            width: 400px;
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<h2>7.Flex + align-items</h2>
+<div class="box box7">
+    <div class="content">
+        立马来看Amos实际完成的 <a href="http://csscoke.com/2015/07/31/nth-child_rwd_album/">
+        CSS3精美相册效果 </a>
+        效果吧！別忘了拖拉一下窗口看看 RWD 效果喔！
+    </div>
+</div>
+
+设定父层display:flex以及设定次轴(cross axis)属性align-items:center 就好了.
+</body>
+</html>

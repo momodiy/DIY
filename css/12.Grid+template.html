@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+        .box {
+            width: 500px;
+            height: 250px;
+            border: 1px solid #f00;
+            margin: auto;
+            display: grid;
+            grid-template-rows: 1fr auto 1fr;
+            grid-template-columns: 1fr auto 1fr;
+            grid-template-areas: '. . .' '. steven .' '. . .';
+        }
+
+        .content {
+            width: 400px;
+            background: #ccc;
+            grid-area: steven;
+        }
+    </style>
+</head>
+<body>
+
+<h2>12.Grid + template</h2>
+<div class="box box12">
+    <div class="content">
+        立马来看Amos实际完成的 <a href="http://csscoke.com/2015/07/31/nth-child_rwd_album/">
+        CSS3精美相册效果 </a>
+        效果吧！別忘了拖拉一下窗口看看 RWD 效果喔！
+    </div>
+</div>
+
+把模板设置成三列，就能搞定垂直居中了。看得我一脸懵逼<BR>
+css fr 单位是一个自适应单位，fr单位被用于在一系列长度值中分配剩余空间，如果多个已指定了多个部分，则剩下的空间根据各自的数字按比例分配。
+</body>
+</html>

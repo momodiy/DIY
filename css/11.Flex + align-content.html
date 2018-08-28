@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+        .box {
+            width: 500px;
+            height: 250px;
+            border: 1px solid #f00;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .content {
+            width: 400px;
+            background: #ccc;
+        }
+
+        .box11:before,
+        .box11:after {
+            content: '';
+            display: block;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<h2>11.Flex + align-content</h2>
+<div class="box box11">
+    <div class="content">
+        立马来看Amos实际完成的 <a href="http://csscoke.com/2015/07/31/nth-child_rwd_album/">
+        CSS3精美相册效果 </a>
+        效果吧！別忘了拖拉一下窗口看看 RWD 效果喔！
+    </div>
+</div>
+
+align-content 仅能对次轴多行flex item做居中。单个元素时可以添加:before和:after让元素增加到多个。
+</body>
+</html>
