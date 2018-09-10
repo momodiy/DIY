@@ -1,5 +1,20 @@
 # vue-cli
 
+## building command
+
+```
+npm install -g @vue/cli
+# OR
+yarn global add @vue/cli
+
+# Check wheather you have the right version (Vue) 
+vue --version
+
+vue create vue-cli
+cd vue-cli
+npm run serve
+```
+
 ## Project setup
 ```
 npm install
