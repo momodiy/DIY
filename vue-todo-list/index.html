@@ -30,7 +30,6 @@
                         v-bind:class="[todo.completed?'completed':'undo']"
                         v-for="(todo,index) in todos">
                         {{todo.title}}
-
                         <button class="btn btn-warning btn-sm float-right"
                                 v-on:click="deleteTodo(index)"
                         >Remove
