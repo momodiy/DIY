@@ -1,26 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>vue-todo-list</title>
     <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
 </head>
-<body>
+<style type="text/css">
+    .undo {
+        color: #5cb85c;
+        text-decoration: line-through;
+    }
 
+    .completed {
+        color: #ca2111;
+        text-decoration: line-through;
+    }
+
+</style>
+<body>
 <div class="container" id="app">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
             <div class="panel panel-default"></div>
             <div class="panel-heading">Welcome Vue.js 2.0 Tutorial</div>
             <div class="panel-body">
-                <h1>MY todos</h1>
+                <h1>MY todos {{todoCount}}</h1>
                 <ul class="list-group">
-                    <li class="list-group-item" v-for="(todo,index) in todos">
+                    <li class="list-group-item"
+                        v-bind:class="[todo.completed?'completed':'undo']"
+                        v-for="(todo,index) in todos">
                         {{todo.title}}
-                        <button class="btn btn-secondary btn-sm float-right"
+
+                        <button class="btn btn-warning btn-sm float-right"
                                 v-on:click="deleteTodo(index)"
                         >Remove
                         </button>
+
+                        <button class="btn btn-sm float-right"
+                                v-bind:class="[todo.completed?'btn-danger':'btn-success']"
+                                v-on:click="toggleCompletion(todo)"
+                        >{{todo.completed?'undo ':'completed'}}
+                        </button>
+
                     </li>
                 </ul>
 
@@ -29,8 +50,7 @@
                         <input type="text"
                                v-model="newTodo.title"
                                class="from-control"
-                               placeholder="add a new todo"
-                        >
+                               placeholder="add a new todo">
                     </div>
                     <div class="from-group">
                         <button class="btn btn-success" type="submit">Add Todo</button>
@@ -49,19 +69,27 @@
         data: {
             message: 'hello World',
             todos: [
-                {id: 1, title: 'learn Vue.js'}
+                {id: 1, title: 'learn Vue.js', completed: false}
             ],
             newTodo: {
                 id: null,
-                title: ''
+                title: '',
+                completed: false
+            }
+        },
+        computed: { //计算、处理数据
+            todoCount() {
+                return this.todos.length;
             }
         },
         methods: {
             addTodo(newTodo) {
                 this.todos.push(newTodo);
-                this.newTodo = {id: '', title: ''};
+                this.newTodo = {id: '', title: '', completed: false};
             }, deleteTodo(index) {
                 this.todos.splice(index, 1);
+            }, toggleCompletion(todo) {
+                todo.completed = !todo.completed;
             }
         }
     })
