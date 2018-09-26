@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-todo-list</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" id="app">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default"></div>
+            <div class="panel-heading">Welcome Vue.js 2.0 Tutorial</div>
+            <div class="panel-body">
+                <h1>MY todos</h1>
+                <ul class="list-group">
+                    <li class="list-group-item" v-for="(todo,index) in todos">
+                        {{todo.title}}
+                        <button class="btn btn-secondary btn-sm float-right"
+                                v-on:click="deleteTodo(index)"
+                        >Remove
+                        </button>
+                    </li>
+                </ul>
+
+                <form v-on:submit.prevent="addTodo(newTodo)">
+                    <div class="from-group">
+                        <input type="text"
+                               v-model="newTodo.title"
+                               class="from-control"
+                               placeholder="add a new todo"
+                        >
+                    </div>
+                    <div class="from-group">
+                        <button class="btn btn-success" type="submit">Add Todo</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+<script type="application/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'hello World',
+            todos: [
+                {id: 1, title: 'learn Vue.js'}
+            ],
+            newTodo: {
+                id: null,
+                title: ''
+            }
+        },
+        methods: {
+            addTodo(newTodo) {
+                this.todos.push(newTodo);
+                this.newTodo = {id: '', title: ''};
+            }, deleteTodo(index) {
+                this.todos.splice(index, 1);
+            }
+        }
+    })
+</script>
+</body>
+</html>
