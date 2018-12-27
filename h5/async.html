@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="application/javascript">
+
+    const sleep = () => delay =>
+        new Promise(reslove =>
+            setTimeout(reslove, delay)
+        )
+
+
+    !async function test() {
+        const t1 = +new Date()
+        await sleep(3000)
+        const t2 = +new Date()
+        console.log(t2 - t1)
+    }()
+</script>
+</body>
+</html>
