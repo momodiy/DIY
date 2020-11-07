@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>ready</button>
+<button>close</button>
+<input type="week" id="mySearch" name="q">
+<script type="application/javascript">
+
+window.onload  = ()=>{
+  console.log('load .final')
+}
+
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  console.log('DOMContentLoaded .final')
+});
+
+// document.addEventListener("onload", ()=>{
+//   console.log('load .final')
+// });
+
+
+document.addEventListener("beforeunload", ()=>{
+  alert('beforeunload .final')
+  return 'beforeunload .final'
+});
+
+document.addEventListener("onunload", ()=>{
+  alert('unload  .final')
+  return 'unload  .final'
+});
+
+window.addEventListener('beforeunload', (event) => {
+  // Cancel the event as stated by the standard.
+  event.preventDefault();
+  // Chrome requires returnValue to be set.
+  event.returnValue = '';
+});
+
+</script>
+</body>
+</html>
