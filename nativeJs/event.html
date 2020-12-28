@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id='one'>
+    <div id='two'>
+        <div id='three'>
+            <div id='four'>
+                <button>Steven Lee</button>
+            </div>
+        </div>
+    </div>
+</div>
+<button id="content">有限点击</button>
+
+<button id="anonymity">匿名函数有限点击</button>
+
+<script type='text/javascript'>
+var one = document.getElementById('one');
+var two = document.getElementById('two');
+var three = document.getElementById('three');
+var four = document.getElementById('four');
+// one.addEventListener('click', function () {
+//   alert('one');
+// }, true);
+// two.addEventListener('click', function () {
+//   alert('two');
+// }, true);
+three.addEventListener('click', function () {
+  alert('three');
+}, true);
+four.addEventListener('click', function () {
+  alert('four');
+}, true);
+//
+// four.addEventListener('click', function () {
+//   alert('nice');
+// }, true);
+
+
+let dom = document.getElementById("content"), clickt = 0;
+dom.addEventListener("click", function (e) {
+  clickt++;
+  alert('你摸了我' + clickt + '下了。最多摸2下哦');
+  if (clickt >= 2) {
+    dom.removeEventListener(e.type, arguments.callee, false);
+    console.log(this);
+  }
+});
+
+let anm = document.getElementById("anonymity"), index = 0;
+anm.addEventListener("click", (e, a) => {
+  console.log(e, a)
+  console.log(this)
+  // clickt++;
+  // alert('你摸了我' + indx + '下了。最多摸2下哦');
+  // if (index >= 2) {
+  //   dom.removeEventListener(e.type, arguments.callee, false);
+  //   console.log(this);
+  // }
+});
+
+// case1: 引用函数名添加一个事件绑定再移除
+const tip = () => console.log('click test')
+let btn = document.getElementById("confirm")
+btn.addEventListener("click", tip, true)
+btn.removeEventListener(click, tip, false) // 注意，第三个参数（是否在捕获阶段执行）不一致会导致解绑失败
+
+// case2：添加绑定的普通函数中解绑
+let btn = document.getElementById("confirm")
+btn.addEventListener("click", function (e) {
+  console.log('绑定成功')
+
+
+  btn.removeEventListener(e.type, arguments.callee, true) // arguments.callee指向当前匿名函数
+}, true)
+
+// case3：添加绑定的函数为匿名箭头函数，无法解绑
+
+let btn = document.getElementById("confirm")
+btn.addEventListener("click", e => {
+  console.log('绑定成功', e)
+
+  // 此时无法获取到当前函数，所以无法解绑
+}, true)
+
+</script>
+</body>
+</html>

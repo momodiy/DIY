@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<h2>Hello</h2>
+<script>
+function printH2() {
+  console.log('first script', document.querySelectorAll('h2'));
+}
+printH2()
+setTimeout(printH2)
+</script>
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/4.0.0-alpha.4/css/bootstrap.css">
+<h2>World</h2>
+<script>
+console.log('second script');
+
+let inp = document.getElementsByClassName('chatInputText')[0]
+let btn = document.getElementsByClassName('chatInputBtn')[0]
+let clss = null
+const book = () => {
+clss = setTimeout(()=>{
+  inp.value = 'nice'
+  btn.clear()
+},1e2)
+}
+我爱D2
+</script>
+</body>
+</html>

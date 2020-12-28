@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <style>
+<!--  BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此  -->
     *{
         margin: 0;
         padding: 0;
@@ -18,12 +19,13 @@
 
     .left {
         width: 100px;
-        height: 150px;
+        height: 450px;
         float: left;
         background: rgb(139, 214, 78);
         text-align: center;
         line-height: 150px;
         font-size: 20px;
+        /*overflow: hidden;*/
     }
 
     .right {
@@ -32,7 +34,7 @@
         text-align: center;
         line-height: 300px;
         font-size: 40px;
-        overflow: hidden;
+        /*overflow: hidden;*/
     }
 </style>
 <body>
