@@ -28,4 +28,4 @@ var validPalindrome = function (str) {
   return true;
 };
 
-console.log(validPalindrome("ebcbbececabbacecbbc"))
+console.log(validPalindrome("ebcbbececabbacecbbcbe"))
