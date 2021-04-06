@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flex:1</title>
+</head>
+<style>
+    .box {
+        height: 200px;
+        display: flex;
+    }
+
+    #box1 {
+        background-color: pink;
+        /*flex-grow: 1;*/
+        flex:2;
+    }
+
+    #box2 {
+        background-color: yellow;
+        /*flex-grow: 3;*/
+        flex:1;
+    }
+</style>
+<body>
+<div class="box">
+    <div id="box1">box1</div>
+    <div id="box2">box2</div>
+
+<!--    flex: 1-->
+<!--    等价于 -->
+<!--    flex-grow: 1;-->
+<!--    flex-shrink: 1;-->
+<!--    flex-basis: 0%;-->
+</div>
+
+</body>
+</html>

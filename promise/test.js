@@ -4,21 +4,14 @@
 * Time: 23:35
 * Project: DIY
 * */
-const p1 = new Promise((resolve, reject) => reject())
-
-const p2 = p1.then( function () {
-  return 456
-}, function () {
-  return false
+const MyPromise = require('../promise/MyPromise')
+const promise = new MyPromise((resolve, reject) => {
+  resolve('success')
+  reject('err')
 })
 
-p2.then(
-  (val) => {
-    console.log(val)
-    console.log('已完成')
-  },
-  (val) => {
-    console.log(val)
-    console.log('已拒绝')
-  }
-)
+promise.then(value => {
+  console.log('resolve', value)
+}, reason => {
+  console.log('reject', reason)
+})

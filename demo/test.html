@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="application/javascript">
+
+    let str = 'Uhg fkxufk';
+    let result = str
+        .split('')
+        .map(v => v.charCodeAt(0) === 32 ? 32 : v.charCodeAt(0) - 3)
+        .map(v => String.fromCharCode(v))
+        .join('');
+
+    // console.log(result); // Red church 秘语为红教堂
+
+    const obj={
+        update(){
+            this.name=111;
+            console.log(555)
+        }
+    }
+
+    setTimeout(obj.update,1000)
+    setTimeout(()=>obj.update(),1000)
+
+
+</script>
+</body>
+</html>
