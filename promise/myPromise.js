@@ -70,5 +70,6 @@ const promise = new MyPromise((resolve, reject) => {
   reject('err')
 })
 
+
 module.exports = MyPromise
 
