@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>throttle</title>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body id="body">
+<script type="application/javascript">
+
+const throttle = (fn, wait) => {
+  let {timer, context, args} = {}
+  console.log(22)
+  return function () {
+    context = this;
+    args = arguments;
+    // 如果定时器存在，则不执行
+    if (!timer) {
+      timer = setTimeout(function () {
+        // 执行后释放定时器变量
+        timer = null;
+        fn.apply(context, args);
+      }, wait);
+    }
+  }
+}
+
+const getXY = ({layerX, layerY}) => {
+// const getXY = () => {
+//   console.log(333)
+  console.log({layerX, layerY})
+}
+
+const throttleMove = e => throttle(getXY, 1e3)
+
+body.addEventListener('mousemove', function (e) {
+  throttleMove(e)()
+  // throttle(getXY.bind(this, e), 1e3)
+})
+
+window.onresize=function(){throttle(getXY,500);};
+</script>
+</body>
+</html>

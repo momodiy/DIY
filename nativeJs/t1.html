@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body id="body">
+
+
+<script type="application/javascript">
+
+const getXY = ({layerX, layerY}) => {
+  console.log({layerX, layerY})
+}
+
+function fn(cb, context, args) {
+  cb.timer && clearTimeout(cb.timer);
+  cb.timer = setTimeout(function () {
+    cb.call(context, args)
+  }, 500);
+}
+
+
+body.addEventListener('mousemove', function (e) {
+  fn(getXY, window, e)
+})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>debounce 防抖</title>
+</head>
+<body>
+<input id="input" onkeydown="change()" placeholder="输入试试" type="text">
+
+<script type="application/javascript">
+
+const debounce1 = (fn, delay) => {
+  let timer;
+  return function () {
+    let ctx = this
+    // 计时器清零
+    clearTimeout(timer);
+    // 重新设置计时器
+    timer = setTimeout(fn.bind(ctx), delay);
+  };
+}
+
+const debounce = (fn, delay, immediate = false) => {
+  var timer;
+  return function () {
+    var context = this;
+    var args = arguments;
+    // 停止定时器
+    if (timer) clearTimeout(timer);
+    // 回调函数执行的时机
+    if (immediate) {
+      // 是否已经执行过
+      // 执行过，则timer指向定时器对象，callNow 为 false
+      // 未执行，则timer 为 null，callNow 为 true
+      var callNow = !timer;
+      // 设置延时
+      timer = setTimeout(function () {
+        timer = null;
+      }, delay);
+      if (callNow) fn.apply(context, args);
+    } else {
+      // 停止调用后delay时间才执行回调函数
+      timer = setTimeout(function () {
+        fn.apply(context, args);
+      }, delay);
+    }
+  };
+}
+
+const run = () => {
+  console.log(input.value)
+}
+
+let d1 = debounce1(run, 1e3)
+const change = () => {
+  d1()
+}
+
+</script>
+</body>
+</html>
