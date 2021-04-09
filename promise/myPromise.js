@@ -10,11 +10,10 @@ const FULFILLED = 'fulfilled';
 const REJECTED = 'rejected';
 
 
-
 // 新建 MyPromise 类
 class MyPromise {
 
-  constructor(executor){
+  constructor(executor) {
     // executor 是一个执行器，进入会立即执行
     // 并传入resolve和reject方法
     executor(this.resolve, this.reject)
@@ -39,6 +38,8 @@ class MyPromise {
       this.status = FULFILLED;
       // 保存成功之后的值
       this.value = value;
+// 判断成功回调是否存在，如果存在就调用
+      this.onFulfilledCallback && this.onFulfilledCallback(value);
     }
   }
 
@@ -50,6 +51,8 @@ class MyPromise {
       this.status = REJECTED;
       // 保存失败后的原因
       this.reason = reason;
+      // 判断失败回调是否存在，如果存在就调用
+      this.onRejectedCallback && this.onRejectedCallback(reason)
     }
   }
 
@@ -61,6 +64,9 @@ class MyPromise {
     } else if (this.status === REJECTED) {
       // 调用失败回调，并且把原因返回
       onRejected(this.reason);
+    } else if (this.status === PENDING) {
+      this.onFulfilledCallback = onFulfilled;
+      this.onRejectedCallback = onRejected;
     }
   }
 }
