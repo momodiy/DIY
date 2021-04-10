@@ -17,7 +17,11 @@ class MyPromise {
     // executor 是一个执行器，进入会立即执行
     // 并传入resolve和reject方法
     executor(this.resolve, this.reject)
+
   }
+
+  onFulfilledCallbacks = []
+  onRejectedCallbacks = []
 
   status = PENDING;
   // 储存状态的变量，初始值是 pending
@@ -38,8 +42,10 @@ class MyPromise {
       this.status = FULFILLED;
       // 保存成功之后的值
       this.value = value;
-// 判断成功回调是否存在，如果存在就调用
-      this.onFulfilledCallback && this.onFulfilledCallback(value);
+      while (this.onFulfilledCallbacks.length) {
+        // Array.shift() 取出数组第一个元素，然后（）调用，shift不是纯函数，取出后，数组将失去该元素，直到数组为空
+        this.onFulfilledCallbacks.shift()(value)
+      }
     }
   }
 
@@ -52,7 +58,10 @@ class MyPromise {
       // 保存失败后的原因
       this.reason = reason;
       // 判断失败回调是否存在，如果存在就调用
-      this.onRejectedCallback && this.onRejectedCallback(reason)
+      // this.onRejectedCallback && this.onRejectedCallback(reason)
+      while (this.onRejectedCallbacks.length) {
+        this.onRejectedCallbacks.shift()(reason)
+      }
     }
   }
 
@@ -65,8 +74,12 @@ class MyPromise {
       // 调用失败回调，并且把原因返回
       onRejected(this.reason);
     } else if (this.status === PENDING) {
-      this.onFulfilledCallback = onFulfilled;
-      this.onRejectedCallback = onRejected;
+
+      this.onFulfilledCallbacks.push(onFulfilled);
+      this.onRejectedCallbacks.push(onRejected);
+
+      // this.onFulfilledCallback = onFulfilled;
+      // this.onRejectedCallback = onRejected;
     }
   }
 }
