@@ -18,9 +18,14 @@ const MyPromise = require('../promise/MyPromise')
 
 // asynchronous test
 const promise = new MyPromise((resolve, reject) => {
-  setTimeout(() => {
-    resolve('success')
-  }, 1e3);
+  // setTimeout(() => {
+    resolve('success self')
+  // }, 1e3);
+})
+
+const p1 = promise.then(value => {
+  console.log(value)
+  return p1
 })
 
 
@@ -33,18 +38,18 @@ function other() {
   })
 }
 
-promise.then(value => {
-  console.log(1)
-  console.log('resolve', value)
-  return other()
-})
-
-promise.then(value => {
-  console.log(2)
-  console.log('resolve', value)
-})
-
-promise.then(value => {
-  console.log(3)
-  console.log('resolve', value)
-})
+// promise.then(value => {
+//   console.log(1)
+//   console.log('resolve', value)
+//   return other()
+// })
+//
+// promise.then(value => {
+//   console.log(2)
+//   console.log('resolve', value)
+// })
+//
+// promise.then(value => {
+//   console.log(3)
+//   console.log('resolve', value)
+// })
