@@ -16,7 +16,12 @@ class MyPromise {
   constructor(executor) {
     // executor 是一个执行器，进入会立即执行
     // 并传入resolve和reject方法
-    executor(this.resolve, this.reject)
+    try {
+      executor(this.resolve, this.reject)
+    } catch (error) {
+      // 如果有错误，就直接执行 reject
+      this.reject(error)
+    }
 
   }
 
@@ -75,7 +80,6 @@ class MyPromise {
           const onFulfilledResult = onFulfilled(this.value)
           resolvePromise(promise2, onFulfilledResult, resolve, reject)
         })
-
 
 
       } else if (this.status === REJECTED) {

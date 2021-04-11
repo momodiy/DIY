@@ -25,6 +25,7 @@ const promise = new MyPromise((resolve, reject) => {
 
 const p1 = promise.then(value => {
   console.log(value)
+  throw new Error('执行器错误')
   return p1
 })
 
