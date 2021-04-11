@@ -66,21 +66,28 @@ class MyPromise {
   }
 
   then(onFulfilled, onRejected) {
-    // 判断状态
-    if (this.status === FULFILLED) {
-      // 调用成功回调，并且把值返回
-      onFulfilled(this.value);
-    } else if (this.status === REJECTED) {
-      // 调用失败回调，并且把原因返回
-      onRejected(this.reason);
-    } else if (this.status === PENDING) {
 
-      this.onFulfilledCallbacks.push(onFulfilled);
-      this.onRejectedCallbacks.push(onRejected);
+    const promise2 = new MyPromise((resolve, reject) => {
+      // 判断状态
+      if (this.status === FULFILLED) {
 
-      // this.onFulfilledCallback = onFulfilled;
-      // this.onRejectedCallback = onRejected;
-    }
+
+        const onFulfilledResult = onFulfilled(this.value)
+        resolvePromise(onFulfilledResult, resolve, reject)
+
+      } else if (this.status === REJECTED) {
+        // 调用失败回调，并且把原因返回
+        onRejected(this.reason);
+      } else if (this.status === PENDING) {
+
+        this.onFulfilledCallbacks.push(onFulfilled);
+        this.onRejectedCallbacks.push(onRejected);
+
+        // this.onFulfilledCallback = onFulfilled;
+        // this.onRejectedCallback = onRejected;
+      }
+    })
+    return promise2
   }
 }
 
@@ -88,6 +95,18 @@ const promise = new MyPromise((resolve, reject) => {
   resolve('success')
   reject('err')
 })
+
+function resolvePromise(x, resolve, reject) {
+  // 判断x是不是 MyPromise 实例对象
+  if(x instanceof MyPromise) {
+    // 执行 x，调用 then 方法，目的是将其状态变为 fulfilled 或者 rejected
+    // x.then(value => resolve(value), reason => reject(reason)) 简化为
+    x.then(resolve, reject)
+  } else{
+    // 普通值
+    resolve(x)
+  }
+}
 
 
 module.exports = MyPromise

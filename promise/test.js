@@ -20,14 +20,23 @@ const MyPromise = require('../promise/MyPromise')
 const promise = new MyPromise((resolve, reject) => {
   setTimeout(() => {
     resolve('success')
-  }, 2000);
+  }, 1e3);
 })
 
 
 // multi-then test
+
+function other() {
+  return new MyPromise((resolve, reject) => {
+    console.log('other resolve')
+    resolve('other')
+  })
+}
+
 promise.then(value => {
   console.log(1)
   console.log('resolve', value)
+  return other()
 })
 
 promise.then(value => {
