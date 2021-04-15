@@ -17,27 +17,27 @@ const MyPromise = require('../promise/MyPromise')
 // })
 
 // asynchronous test
-const promise = new MyPromise((resolve, reject) => {
+// const promise = new MyPromise((resolve, reject) => {
   // setTimeout(() => {
-    resolve('success self')
+  //   resolve('success self')
   // }, 1e3);
-})
+// })
 
-const p1 = promise.then(value => {
-  console.log(value)
-  throw new Error('执行器错误')
-  return p1
-})
-
-
-// multi-then test
-
-function other() {
-  return new MyPromise((resolve, reject) => {
-    console.log('other resolve')
-    resolve('other')
-  })
-}
+// const p1 = promise.then(value => {
+//   console.log(value)
+//   throw new Error('执行器错误')
+//   return p1
+// })
+//
+//
+// // multi-then test
+//
+// function other() {
+//   return new MyPromise((resolve, reject) => {
+//     console.log('other resolve')
+//     resolve('other')
+//   })
+// }
 
 // promise.then(value => {
 //   console.log(1)
@@ -54,3 +54,11 @@ function other() {
 //   console.log(3)
 //   console.log('resolve', value)
 // })
+
+
+const promise = new MyPromise((resolve, reject) => {
+  resolve('success')
+  // throw new Error('执行器错误')
+})
+
+promise.then().then().then(value => console.log(value))

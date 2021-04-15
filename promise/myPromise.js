@@ -72,30 +72,93 @@ class MyPromise {
 
   then(onFulfilled, onRejected) {
 
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value;
+    onRejected = typeof onRejected === 'function' ? onRejected : reason => {throw reason}
+
+
     const promise2 = new MyPromise((resolve, reject) => {
       // 判断状态
       if (this.status === FULFILLED) {
 
-        queueMicrotask(()=>{
-          const onFulfilledResult = onFulfilled(this.value)
-          resolvePromise(promise2, onFulfilledResult, resolve, reject)
+        queueMicrotask(() => {
+          try {
+            const onFulfilledResult = onFulfilled(this.value)
+            resolvePromise(promise2, onFulfilledResult, resolve, reject)
+          } catch (err) {
+            reject(err)
+          }
+
         })
 
 
       } else if (this.status === REJECTED) {
         // 调用失败回调，并且把原因返回
-        onRejected(this.reason);
+
+        queueMicrotask(() => {
+          try {
+            // 调用失败回调，并且把原因返回
+            const x = onRejected(this.reason);
+            // 传入 resolvePromise 集中处理
+            resolvePromise(promise2, x, resolve, reject);
+          } catch (error) {
+            reject(error)
+          }
+        })
+
       } else if (this.status === PENDING) {
 
-        this.onFulfilledCallbacks.push(onFulfilled);
-        this.onRejectedCallbacks.push(onRejected);
-
-        // this.onFulfilledCallback = onFulfilled;
-        // this.onRejectedCallback = onRejected;
+        this.onFulfilledCallbacks.push(() => {
+          // ==== 新增 ====
+          queueMicrotask(() => {
+            try {
+              // 获取成功回调函数的执行结果
+              const x = onFulfilled(this.value);
+              // 传入 resolvePromise 集中处理
+              resolvePromise(promise2, x, resolve, reject);
+            } catch (error) {
+              reject(error)
+            }
+          })
+        });
+        this.onRejectedCallbacks.push(() => {
+          // ==== 新增 ====
+          queueMicrotask(() => {
+            try {
+              // 调用失败回调，并且把原因返回
+              const x = onRejected(this.reason);
+              // 传入 resolvePromise 集中处理
+              resolvePromise(promise2, x, resolve, reject);
+            } catch (error) {
+              reject(error)
+            }
+          })
+        });
       }
     })
+
     return promise2
   }
+
+  // resolve 静态方法
+  static resolve (parameter) {
+    // 如果传入 MyPromise 就直接返回
+    if (parameter instanceof MyPromise) {
+      return parameter;
+    }
+
+    // 转成常规方式
+    return new MyPromise(resolve =>  {
+      resolve(parameter);
+    });
+  }
+
+  // reject 静态方法
+  static reject (reason) {
+    return new MyPromise((resolve, reject) => {
+      reject(reason);
+    });
+  }
+
 }
 
 const promise = new MyPromise((resolve, reject) => {
@@ -104,17 +167,16 @@ const promise = new MyPromise((resolve, reject) => {
 })
 
 function resolvePromise(promise2, x, resolve, reject) {
-  console.log(promise2, x)
   if (promise2 === x) {
     return reject(new TypeError('Chaining cycle detected for promise #<Promise>'))
   }
 
   // 判断x是不是 MyPromise 实例对象
-  if(x instanceof MyPromise) {
+  if (x instanceof MyPromise) {
     // 执行 x，调用 then 方法，目的是将其状态变为 fulfilled 或者 rejected
     // x.then(value => resolve(value), reason => reject(reason)) 简化为
     x.then(resolve, reject)
-  } else{
+  } else {
     // 普通值
     resolve(x)
   }
