@@ -15,6 +15,7 @@ function sleep1() {
   let ts = +new Date
   while( Date.now() < (ts+3e3)){}
   console.log('await final')
+  console.log(globalThis === global)
 }
 sleep1()
 // sleep(3e3).then(()=>{

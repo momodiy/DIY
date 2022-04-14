@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Components</title>
+</head>
+<body>
+
+<steven-lee></steven-lee>
+<br/>
+<steven-lee/>
+
+<template id="slTemplate">
+  <style>
+    p {
+      padding: 10px;
+      background-color: rgb(55,136,255);
+      color: white;
+    }
+  </style>
+
+  <p>Hello Steven</p>
+</template>
+<script>
+class StevenLee extends HTMLElement {
+  constructor () {
+    super()
+    // 得到组建模板内容
+    // console.log(template)
+    const template = document.querySelector('#slTemplate').content
+    //  创建组件根元素 ：影子 DOM 节点
+    const shadowRoot = this.attachShadow({ mode: 'open' })
+    //  模板节点添加到影子DOM节点中
+    shadowRoot.appendChild(template.cloneNode(true))
+  }
+}
+
+// 参数一: 组件名  参数二: 组件类
+customElements.define('steven-lee', StevenLee)
+
+</script>
+</body>
+</html>

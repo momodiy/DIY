@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<p>
+  <span>普通：</span><input type="text" oninput="logChange()" id="input0">
+</p>
+<p>
+  <span>节流：</span><input type="text" oninput="throttleChange()" id="input1">
+</p>
+<p>
+  <span>防抖：</span><input type="text" oninput="debounceChange()" id="input2">
+</p>
+<script src="throttle.js"></script>
+<script type="application/javascript">
+
+const logChange = () => console.log('input修改')
+const throttleChange = throttle(logChange, 1e3)
+const debounceChange = debounce(logChange, 1e3)
+
+</script>
+</body>
+</html>
